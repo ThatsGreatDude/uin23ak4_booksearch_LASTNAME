@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import './BookList.css';
+import React, { useState, useEffect } from 'react';
+import BookCard from './BookCard'; // Correct import name
 
 function BookList() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch('https://openlibrary.org/api/books?bibkeys=OLID:10834736-S,OLID:10834737-S,OLID:10834738-S,OLID:10834739-S,OLID:10834740-S')
-      .then((response) => response.json())
-      .then((data) => setBooks(data));
+    fetch('https://openlibrary.org/search.json?title=james+bond')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.docs) {
+          setBooks(data.docs);
+        }
+      })
+      .catch(error => console.error('Error fetching books:', error));
   }, []);
 
   return (
-    <div className="BookList">
-      {books.map((book) => (
-        <BookCard key={book.key} book={book} />
-      ))}
+    <div className="book-list">
+      <h2>Books</h2>
+      <div>
+        {books.map(book => (
+          <BookCard key={book.key} book={book} />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default BookList;

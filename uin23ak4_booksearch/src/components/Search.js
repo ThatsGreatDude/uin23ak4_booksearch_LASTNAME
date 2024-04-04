@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
-import './Search.css';
 
-function Search() {
+function Search({ onSearchResults }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (event) => {
-    setSearchQuery(event.target.value);
+    const query = event.target.value;
+    setSearchQuery(query);
+    if (query.length >= 3) {
+      fetch(`https://openlibrary.org/search.json?title=james+bond+${query}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.docs) {
+            onSearchResults(data.docs);
+          }
+        })
+        .catch(error => console.error('Error fetching search results:', error));
+    }
   };
 
   return (
     <div className="Search">
-      <input type="text" placeholder="Søk etter bøker..." value={searchQuery} onChange={handleSearch} />
+      <input type="text" placeholder="Search for books..." value={searchQuery} onChange={handleSearch} />
     </div>
   );
 };

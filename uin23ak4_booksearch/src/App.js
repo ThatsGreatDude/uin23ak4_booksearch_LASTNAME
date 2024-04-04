@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Search from './components/Search';
-import BookList from './components/Booklist'; // Correct import name
-import SearchResults from './components/SearchResults'; // Correct import name
+import BookList from './components/BookList';
+import SearchResults from './components/SearchResults'; 
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);

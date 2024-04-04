@@ -1,5 +1,5 @@
 import React from 'react';
-import BookCard from './BookCard'; // Correct import name
+import BookCard from './BookCard';
 
 function SearchResults({ results }) {
   return (

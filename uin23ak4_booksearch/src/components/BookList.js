@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BookCard from './BookCard'; // Correct import name
+import BookCard from './BookCard';
 
 function BookList() {
   const [books, setBooks] = useState([]);

@@ -6,7 +6,7 @@ function Search({ onSearchResults }) {
   const handleSearch = (event) => {
     const query = event.target.value;
     setSearchQuery(query);
-    if (query.length >= 3) {
+    if (query.length >= 3) { 
       fetch(`https://openlibrary.org/search.json?title=james+bond+${query}`)
         .then(response => response.json())
         .then(data => {
@@ -15,6 +15,8 @@ function Search({ onSearchResults }) {
           }
         })
         .catch(error => console.error('Error fetching search results:', error));
+    } else {
+      onSearchResults([]); 
     }
   };
 
